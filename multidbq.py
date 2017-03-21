@@ -14,7 +14,7 @@ def main():
 	parser.add_argument('-d', '--root-dir', default='./', help='Root directory to find DB files in')
 	parser.add_argument('-c', '--config', default='config.json', help='Specifies which config file to use')
 	parser.add_argument('-pf', '--print-found-dbs', default=False, help='If True, prints all DB files found')
-	parser.add_argument('-l', '--limit', nargs=1, default=0, help='If True, prints all DB files found')
+	parser.add_argument('-l', '--limit', nargs=1, default=0, help='Limits the number of DBs queried up to the first X specified by this limit')
 
 	args = parser.parse_args()
 
