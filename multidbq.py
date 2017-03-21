@@ -1,6 +1,7 @@
 import json
 import sqlite3
 import argparse
+import sys
 from os import listdir
 from os import walk
 
@@ -13,7 +14,7 @@ def main():
 	parser.add_argument('-d', '--root-dir', default='./', help='Root directory to find DB files in')
 	parser.add_argument('-c', '--config', default='config.json', help='Specifies which config file to use')
 	parser.add_argument('-pf', '--print-found-dbs', default=False, help='If True, prints all DB files found')
-	parser.add_argument('-l', '--limit', nargs=1, default=-1, help='If True, prints all DB files found')
+	parser.add_argument('-l', '--limit', nargs=1, default=0, help='If True, prints all DB files found')
 
 	args = parser.parse_args()
 
@@ -25,12 +26,21 @@ def main():
 		print('DBs found: ', str(dbs_found))
 
 	count = 0
-	limit = int(args.limit[0])
+	limit = 0
+
+	if(args.limit != 0):
+		try:
+			limit = int(args.limit[0])
+
+		except ValueError as err:
+			print('The limit argument must be an integer:', str(err))
+			sys.exit(1)
+
 
 	for db in dbs_found:
 		if(limit > 0 and count >= limit):
 			break
-			
+
 		print('')
 		print('----------------------------------------------------------------------------------------------------')
 		
